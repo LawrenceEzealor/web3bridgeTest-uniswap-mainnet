@@ -20,16 +20,16 @@ const main = async () => {
   await helpers.impersonateAccount(AssetHolder);
   const impersonatedSigner = await ethers.getSigner(AssetHolder);
 
-  // Get contract for interaction - (tokens)
+  // This gets contract for interaction - (tokens)
   const USDC = await ethers.getContractAt("IERC20", USDCAddress);
   const DAI = await ethers.getContractAt("IERC20", DAIAddress);
   const WETH = await ethers.getContractAt("IERC20", wethAdress);
 
-  // Get contract for interaction - (router)
+  // This gets contract for interaction - (router)
   const ROUTER = await ethers.getContractAt("IUniSwap", UNIRouter);
 
   const amountOut = ethers.parseUnits("5000", 6);
-  // const amountIn = ethers.parseEther("1");
+  
 
   // Approve tokens
   const approve1 = await USDC.connect(impersonatedSigner).approve(
@@ -39,7 +39,7 @@ const main = async () => {
 
   await approve1.wait();
 
-  //checking balance before swap
+  //balance before swap
   const usdcBalBeforeSwap = await USDC.balanceOf(impersonatedSigner.address);
   const daiBalBeforeSwap = await DAI.balanceOf(impersonatedSigner.address);
 
